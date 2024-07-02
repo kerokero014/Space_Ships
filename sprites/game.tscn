@@ -1,0 +1,98 @@
+[gd_scene load_steps=14 format=3 uid="uid://bxnrfc17hnlyd"]
+
+[ext_resource type="Script" path="res://scripts/floor.gd" id="1_e0ndk"]
+[ext_resource type="Texture2D" uid="uid://drrud85deqcu6" path="res://sprites/Track.png" id="2_gkgup"]
+[ext_resource type="Script" path="res://scripts/player.gd" id="3_w56vt"]
+[ext_resource type="Texture2D" uid="uid://b67p8i5fqy66c" path="res://sprites/DinoDuck1.png" id="4_0rsk5"]
+[ext_resource type="Texture2D" uid="uid://cd8mq5u8ng5rn" path="res://sprites/DinoDuck2.png" id="5_bqjdi"]
+[ext_resource type="Texture2D" uid="uid://c880ygumx4uda" path="res://sprites/DinoStart.png" id="6_fm6h7"]
+[ext_resource type="Texture2D" uid="uid://deewch4an6hj0" path="res://sprites/DinoRun1.png" id="7_dp1ke"]
+[ext_resource type="Texture2D" uid="uid://h17g852ye2k0" path="res://sprites/DinoRun2.png" id="8_4a144"]
+[ext_resource type="PackedScene" uid="uid://gpp4mve7lopq" path="res://obstacles/birth.tscn" id="9_i3ofs"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bvj3a"]
+size = Vector2(125, 20)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_saot4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_0rsk5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_bqjdi")
+}],
+"loop": true,
+"name": &"bentdown",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_fm6h7")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_dp1ke")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_4a144")
+}],
+"loop": true,
+"name": &"run",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_c0cin"]
+size = Vector2(81, 88)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4p67e"]
+size = Vector2(114.5, 53.5)
+
+[node name="Game" type="Node2D"]
+
+[node name="Floor" type="Node2D" parent="."]
+script = ExtResource("1_e0ndk")
+
+[node name="Track" type="Sprite2D" parent="Floor"]
+position = Vector2(1.90735e-06, 565)
+scale = Vector2(0.479513, 0.821428)
+texture = ExtResource("2_gkgup")
+centered = false
+
+[node name="Track2" type="Sprite2D" parent="Floor"]
+position = Vector2(1149, 565)
+scale = Vector2(0.479513, 0.821428)
+texture = ExtResource("2_gkgup")
+centered = false
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Floor"]
+
+[node name="floorcollision" type="CollisionShape2D" parent="Floor/StaticBody2D"]
+position = Vector2(156, 599)
+shape = SubResource("RectangleShape2D_bvj3a")
+
+[node name="player" type="CharacterBody2D" parent="."]
+script = ExtResource("3_w56vt")
+metadata/_edit_group_ = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="player"]
+position = Vector2(156, 544)
+sprite_frames = SubResource("SpriteFrames_saot4")
+animation = &"idle"
+
+[node name="Standing" type="CollisionShape2D" parent="player"]
+position = Vector2(156, 545)
+shape = SubResource("RectangleShape2D_c0cin")
+
+[node name="Bent" type="CollisionShape2D" parent="player"]
+position = Vector2(153, 548)
+shape = SubResource("RectangleShape2D_4p67e")
+
+[node name="Obstacles" type="Node" parent="."]
+
+[node name="Bird" parent="Obstacles" instance=ExtResource("9_i3ofs")]
+position = Vector2(1257, 507)

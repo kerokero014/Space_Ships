@@ -1,0 +1,6 @@
+res://Scenes/game.tscn
+res://scripts/floor.gd
+res://scripts/player.gd
+res://obstacles/birth.tscn
+res://sprites/game.tscn
+res://scripts/birth.gd
