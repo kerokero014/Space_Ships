@@ -31,7 +31,7 @@ metadata/_edit_group_ = true
 position = Vector2(-6, 5)
 sprite_frames = SubResource("SpriteFrames_32oqr")
 animation = &"bird"
-frame_progress = 0.154093
+frame_progress = 0.417138
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-15, 1)
