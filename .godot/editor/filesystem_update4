@@ -1,2 +1,7 @@
-res://sprites/game.tscn
+res://scripts/birth.gd
 res://obstacles/birth.tscn
+res://sprites/game.tscn
+res://obstacles/cactus.tscn
+res://obstacles/bird.tscn
+res://scripts/bird.gd
+res://scripts/obs_tgeneration.gd

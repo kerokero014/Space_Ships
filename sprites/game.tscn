@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bxnrfc17hnlyd"]
+[gd_scene load_steps=16 format=3 uid="uid://bxnrfc17hnlyd"]
 
 [ext_resource type="Script" path="res://scripts/floor.gd" id="1_e0ndk"]
 [ext_resource type="Texture2D" uid="uid://drrud85deqcu6" path="res://sprites/Track.png" id="2_gkgup"]
@@ -8,7 +8,9 @@
 [ext_resource type="Texture2D" uid="uid://c880ygumx4uda" path="res://sprites/DinoStart.png" id="6_fm6h7"]
 [ext_resource type="Texture2D" uid="uid://deewch4an6hj0" path="res://sprites/DinoRun1.png" id="7_dp1ke"]
 [ext_resource type="Texture2D" uid="uid://h17g852ye2k0" path="res://sprites/DinoRun2.png" id="8_4a144"]
-[ext_resource type="PackedScene" uid="uid://gpp4mve7lopq" path="res://obstacles/birth.tscn" id="9_i3ofs"]
+[ext_resource type="Script" path="res://scripts/obs_tgeneration.gd" id="9_6p8n5"]
+[ext_resource type="PackedScene" uid="uid://gpp4mve7lopq" path="res://obstacles/bird.tscn" id="9_i3ofs"]
+[ext_resource type="PackedScene" uid="uid://dd6wbo6ea32ok" path="res://obstacles/cactus.tscn" id="10_a2thx"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bvj3a"]
 size = Vector2(125, 20)
@@ -76,6 +78,7 @@ position = Vector2(156, 599)
 shape = SubResource("RectangleShape2D_bvj3a")
 
 [node name="player" type="CharacterBody2D" parent="."]
+disable_mode = 2
 script = ExtResource("3_w56vt")
 metadata/_edit_group_ = true
 
@@ -93,6 +96,18 @@ position = Vector2(153, 548)
 shape = SubResource("RectangleShape2D_4p67e")
 
 [node name="Obstacles" type="Node" parent="."]
+script = ExtResource("9_6p8n5")
 
 [node name="Bird" parent="Obstacles" instance=ExtResource("9_i3ofs")]
-position = Vector2(1257, 507)
+position = Vector2(1171, 494)
+disable_mode = 2
+
+[node name="Cactus" parent="Obstacles" instance=ExtResource("10_a2thx")]
+position = Vector2(643, 543)
+disable_mode = 2
+
+[node name="Timer" type="Timer" parent="Obstacles"]
+wait_time = 0.5
+autostart = true
+
+[connection signal="timeout" from="Obstacles/Timer" to="Obstacles" method="_on_timer_timeout"]
